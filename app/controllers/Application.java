@@ -13,5 +13,9 @@ public class Application extends Controller {
         		Project.finder.all(),
         		Task.find.all()));
     }
+    
+    public static Result login(){
+    	return ok(login.render());
+    }
   
 }

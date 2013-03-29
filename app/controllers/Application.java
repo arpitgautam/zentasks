@@ -14,8 +14,9 @@ public class Application extends Controller {
 	@Security.Authenticated(Secured.class)
     public static Result index() {
         return ok(index.render(
-        		Project.finder.all(),
-        		Task.find.all()));
+        		Project.findInvolving(request().username()),
+        		Task.findTodoInvolving(request().username()),
+                User.find.byId(request().username())));
     }
     
     public static Result login(){
@@ -29,6 +30,7 @@ public class Application extends Controller {
             routes.Application.login()
         );
     }
+    
     public static Result authenticate(){
     	Form<Login> loginForm = form(Login.class).bindFromRequest();
     	if(loginForm.hasErrors()){
@@ -55,5 +57,4 @@ public class Application extends Controller {
     		return null;
     	}
     }
-  
 }

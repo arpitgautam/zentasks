@@ -1,3 +1,4 @@
+@(form:Form[Application.Login])
 <html>
     <head>
         <title>Zentasks</title>
@@ -8,6 +9,30 @@
         <header>
             <a href="@routes.Application.index" id="logo"><span>Zen</span>tasks</a>
         </header>
-    
+    	@helper.form(routes.Application.authenticate) {
+	   <h1>Sign in</h1>
+	   
+	   @if(form.hasGlobalErrors) {
+	    <p class="error">
+	        @form.globalError.message
+	    </p>
+		}
+		
+		@if(flash.contains("success")) {
+	    <p class="success">
+	        @flash.get("success")
+	    </p>
+		}
+	
+	   <p>
+	       <input type="email" name="email" placeholder="Email" value="@form("email").value">
+	   </p>
+	   <p>
+	       <input type="password" name="password" placeholder="Password">
+	   </p>
+	   <p>
+	       <button type="submit">Login</button>
+	   </p>
+	}
     </body>
 </html>
